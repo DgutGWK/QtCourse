@@ -14,21 +14,24 @@ SOURCES += \
     main.cpp \
     loginview.cpp \
     mainview.cpp \
-    patienteditview.cpp
+    patienteditview.cpp \
+    treatrecordeditview.cpp
 
 HEADERS += \
     doctoreditview.h \
     drugeditview.h \
     loginview.h \
     mainview.h \
-    patienteditview.h
+    patienteditview.h \
+    treatrecordeditview.h
 
 FORMS += \
     doctoreditview.ui \
     drugeditview.ui \
     loginview.ui \
     mainview.ui \
-    patienteditview.ui
+    patienteditview.ui \
+    treatrecordeditview.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
