@@ -3,6 +3,8 @@
 #include "doctoreditview.h"
 #include "patienteditview.h"
 #include "drugeditview.h"
+#include "treatrecordeditview.h"
+#include "idatabase.h"
 
 mainview::mainview(QWidget *parent)
     : QMainWindow(parent)
@@ -10,6 +12,17 @@ mainview::mainview(QWidget *parent)
 {
     ui->setupUi(this);
     ui->tabWidget->tabBar()->setStyle(new CustomTabStyle);
+
+    ui->DoctorMessageView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->DoctorMessageView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->DoctorMessageView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->DoctorMessageView->setAlternatingRowColors(true);
+
+    IDatabase &iDatabase = IDatabase::getInstance();
+    if (iDatabase.initDoctorModel()) {
+        ui->DoctorMessageView->setModel(iDatabase.doctorTabModel);
+        ui->DoctorMessageView->setSelectionModel(iDatabase.theDoctorSelection);
+    }
 }
 
 mainview::~mainview()
@@ -64,12 +77,13 @@ void mainview::on_ActionDoctorcomboBox_activated(int index)
 {
     index = ui->ActionDoctorcomboBox->currentIndex();
     if (index == 0) {
-        DoctorEditView *view = new DoctorEditView;
-        view->show();
+        int currow = IDatabase::getInstance().addNewDoctor();
+        emit goDoctorEditView(currow);
     } else if (index == 1) {
-
+        QModelIndex curIndex = IDatabase::getInstance().theDoctorSelection->currentIndex();
+        emit goDoctorEditView(curIndex.row());
     } else if (index == 2) {
-
+        IDatabase::getInstance().deleteCurrentDoctor();
     } else if (index == 3) {
 
     } else {
@@ -111,5 +125,38 @@ void mainview::on_ActionDrugcomboBox_activated(int index)
     } else {
 
     }
+}
+
+
+void mainview::on_ActionTreatRecordcomboBox_activated(int index)
+{
+    index = ui->ActionTreatRecordcomboBox->currentIndex();
+    if (index == 0) {
+        TreatRecordEditView *view = new TreatRecordEditView;
+        view->show();
+    } else if (index == 1) {
+
+    } else if (index == 2) {
+
+    } else if (index == 3) {
+
+    } else {
+
+    }
+}
+
+
+void mainview::on_backButton_clicked()
+{
+    qDebug() << "BackSuccess";
+    emit backSuccess();
+    this->close();
+}
+
+
+void mainview::on_SearchDoctorButton_clicked()
+{
+    QString filter = QString("doctorname like '%%1%'").arg(ui->SearchDoctorEdit->text());
+    IDatabase::getInstance().searchDoctor(filter);
 }
 

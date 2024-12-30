@@ -86,7 +86,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit"/>
+          <widget class="QLineEdit" name="DoctorName"/>
          </item>
          <item>
           <widget class="QLabel" name="label_2">
@@ -96,7 +96,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox">
+          <widget class="QComboBox" name="Sex">
            <item>
             <property name="text">
              <string>男</string>
@@ -117,7 +117,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_15"/>
+          <widget class="QComboBox" name="Ration"/>
          </item>
          <item>
           <widget class="QLabel" name="label_17">
@@ -127,7 +127,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_6"/>
+          <widget class="QComboBox" name="EntryTime_Year"/>
          </item>
          <item>
           <widget class="QLabel" name="label_18">
@@ -137,7 +137,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_7"/>
+          <widget class="QComboBox" name="EntryTime_Month"/>
          </item>
          <item>
           <widget class="QLabel" name="label_19">
@@ -164,7 +164,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_2">
+          <widget class="QComboBox" name="Born_Year">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -187,7 +187,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_3">
+          <widget class="QComboBox" name="Born_Month">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -210,7 +210,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_4">
+          <widget class="QComboBox" name="Born_Day">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -259,7 +259,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="spinBox">
+          <widget class="QSpinBox" name="Age">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -286,7 +286,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_12"/>
+          <widget class="QComboBox" name="EducationBackground"/>
          </item>
          <item>
           <widget class="QLabel" name="label_23">
@@ -302,7 +302,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_13"/>
+          <widget class="QComboBox" name="MaritalStatus"/>
          </item>
          <item>
           <widget class="QLabel" name="label_4">
@@ -318,7 +318,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+          <widget class="QDoubleSpinBox" name="Height"/>
          </item>
          <item>
           <widget class="QLabel" name="label_5">
@@ -334,7 +334,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+          <widget class="QDoubleSpinBox" name="Weight"/>
          </item>
         </layout>
        </item>
@@ -354,7 +354,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_5">
+          <widget class="QLineEdit" name="JobId">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -377,7 +377,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_14"/>
+          <widget class="QComboBox" name="Department"/>
          </item>
          <item>
           <widget class="QLabel" name="label_21">
@@ -393,7 +393,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_11"/>
+          <widget class="QComboBox" name="JobIdentity"/>
          </item>
         </layout>
        </item>
@@ -409,7 +409,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="comboBox_5">
+            <widget class="QComboBox" name="CertificateType">
              <item>
               <property name="text">
                <string>中华人民共和国居民身份证</string>
@@ -469,7 +469,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit_6"/>
+            <widget class="QLineEdit" name="CertificateNumber"/>
            </item>
           </layout>
          </item>
@@ -485,13 +485,13 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_8"/>
+          <widget class="QComboBox" name="NativePlace_Province"/>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_9"/>
+          <widget class="QComboBox" name="NativePlace_City"/>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_10"/>
+          <widget class="QComboBox" name="NativePlace_County"/>
          </item>
          <item>
           <widget class="QLabel" name="label_11">
@@ -501,7 +501,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_3"/>
+          <widget class="QLineEdit" name="Place"/>
          </item>
         </layout>
        </item>
@@ -515,7 +515,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_2"/>
+          <widget class="QLineEdit" name="Phone"/>
          </item>
          <item>
           <widget class="QLabel" name="label_16">
@@ -525,7 +525,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_7"/>
+          <widget class="QLineEdit" name="Email"/>
          </item>
         </layout>
        </item>
@@ -539,7 +539,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_4"/>
+          <widget class="QLineEdit" name="PractiseCertificate"/>
          </item>
         </layout>
        </item>

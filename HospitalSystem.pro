@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     doctoreditview.cpp \
     drugeditview.cpp \
+    idatabase.cpp \
     main.cpp \
     loginview.cpp \
     mainview.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
 HEADERS += \
     doctoreditview.h \
     drugeditview.h \
+    idatabase.h \
     loginview.h \
     mainview.h \
     patienteditview.h \

@@ -25,6 +25,17 @@ private slots:
 
     void on_ActionDrugcomboBox_activated(int index);
 
+    void on_ActionTreatRecordcomboBox_activated(int index);
+
+private slots:
+    void on_backButton_clicked();
+
+    void on_SearchDoctorButton_clicked();
+
+signals:
+    void backSuccess();
+    void goDoctorEditView(int idx);
+
 private:
     Ui::mainview *ui;
 };
