@@ -5,6 +5,8 @@
 #include <QProxyStyle>
 #include <QStyleOptionTab>
 #include <QPainter>
+#include "doctoreditview.h"
+#include "patienteditview.h"
 
 namespace Ui {
 class mainview;
@@ -27,17 +29,24 @@ private slots:
 
     void on_ActionTreatRecordcomboBox_activated(int index);
 
-private slots:
     void on_backButton_clicked();
 
     void on_SearchDoctorButton_clicked();
 
+public slots:
+    void goDoctorEditView(int rowNo);
+    void goPatientEditView(int rowNo);
+    void reshow();
+
 signals:
     void backSuccess();
-    void goDoctorEditView(int idx);
+    void goDoctorEditViewSuccess(int idx);
+    void goPatientEditViewSuccess(int idx);
 
 private:
     Ui::mainview *ui;
+    DoctorEditView *doctorEditView;
+    PatientEditView *patientEditView;
 };
 
 //自定义tabbar的样式

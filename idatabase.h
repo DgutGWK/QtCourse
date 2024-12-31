@@ -30,11 +30,20 @@ public:
     bool initDoctorModel();
     int addNewDoctor();
     bool searchDoctor(QString filter);
-    bool deleteCurrentDoctor();
+    void deleteCurrentDoctor();
     bool submitDoctorEdit();
     void revertDoctorEdit();
     QSqlTableModel *doctorTabModel;     //数据模型
     QItemSelectionModel *theDoctorSelection;     //选择模型
+
+    bool initPatientModel();
+    int addNewPatient();
+    bool searchPatient(QString filter);
+    void deleteCurrentPatient();
+    bool submitPatientEdit();
+    void revertPatientEdit();
+    QSqlTableModel *patientTabModel;     //数据模型
+    QItemSelectionModel *thePatientSelection;
 };
 
 #endif // IDATABASE_H

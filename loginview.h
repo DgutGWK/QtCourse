@@ -29,7 +29,6 @@ signals:
     void loginSuccess();
 
 private:
-    void pushWidgetToStackView(QWidget *widget);
     Ui::loginview *ui;
     mainview *MainView;
 

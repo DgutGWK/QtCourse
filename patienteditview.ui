@@ -84,7 +84,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="PatientName"/>
        </item>
        <item>
         <widget class="QLabel" name="label_2">
@@ -94,7 +94,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBox">
+        <widget class="QComboBox" name="comboBoxSex">
          <item>
           <property name="text">
            <string>男</string>
@@ -115,7 +115,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBox_15"/>
+        <widget class="QComboBox" name="Ration"/>
        </item>
        <item>
         <widget class="QLabel" name="label_4">
@@ -131,7 +131,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+        <widget class="QDoubleSpinBox" name="Height"/>
        </item>
        <item>
         <widget class="QLabel" name="label_5">
@@ -147,7 +147,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+        <widget class="QDoubleSpinBox" name="Weight"/>
        </item>
       </layout>
      </item>
@@ -262,7 +262,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="spinBox">
+        <widget class="QSpinBox" name="Age">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -369,7 +369,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_3"/>
+        <widget class="QLineEdit" name="Place"/>
        </item>
       </layout>
      </item>
@@ -383,7 +383,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_2"/>
+        <widget class="QLineEdit" name="Phone"/>
        </item>
        <item>
         <widget class="QLabel" name="label_16">
@@ -420,7 +420,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="btCancelPatientMessage">
          <property name="text">
           <string>取消</string>
          </property>

@@ -1,7 +1,5 @@
 #include "mainview.h"
 #include "ui_mainview.h"
-#include "doctoreditview.h"
-#include "patienteditview.h"
 #include "drugeditview.h"
 #include "treatrecordeditview.h"
 #include "idatabase.h"
@@ -23,6 +21,9 @@ mainview::mainview(QWidget *parent)
         ui->DoctorMessageView->setModel(iDatabase.doctorTabModel);
         ui->DoctorMessageView->setSelectionModel(iDatabase.theDoctorSelection);
     }
+
+    connect(this, SIGNAL(goDoctorEditViewSuccess(int)), this, SLOT(goDoctorEditView(int)));
+    connect(this, SIGNAL(goPatientEditViewSuccess(int)), this, SLOT(goPatientEditView(int)));
 }
 
 mainview::~mainview()
@@ -78,7 +79,7 @@ void mainview::on_ActionDoctorcomboBox_activated(int index)
     index = ui->ActionDoctorcomboBox->currentIndex();
     if (index == 0) {
         int currow = IDatabase::getInstance().addNewDoctor();
-        emit goDoctorEditView(currow);
+        emit goDoctorEditViewSuccess(currow);
     } else if (index == 1) {
         QModelIndex curIndex = IDatabase::getInstance().theDoctorSelection->currentIndex();
         emit goDoctorEditView(curIndex.row());
@@ -96,8 +97,8 @@ void mainview::on_ActionPatientcomboBox_activated(int index)
 {
     index = ui->ActionPatientcomboBox->currentIndex();
     if (index == 0) {
-        PatientEditView *view = new PatientEditView;
-        view->show();
+        int currow = IDatabase::getInstance().addNewPatient();
+        emit goPatientEditViewSuccess(currow);
     } else if (index == 1) {
 
     } else if (index == 2) {
@@ -160,3 +161,23 @@ void mainview::on_SearchDoctorButton_clicked()
     IDatabase::getInstance().searchDoctor(filter);
 }
 
+void mainview::goDoctorEditView(int rowNo)
+{
+    qDebug() << "goDoctorEditView";
+    doctorEditView = new DoctorEditView(this, rowNo);
+    connect(doctorEditView, SIGNAL(goPreviousView()), this, SLOT(reshow()));
+    doctorEditView->show();
+}
+
+void mainview::goPatientEditView(int rowNo)
+{
+    qDebug() << "goPatientEditView";
+    patientEditView = new PatientEditView(this, rowNo);
+    connect(patientEditView, SIGNAL(goPreviousView()), this, SLOT(reshow()));
+    patientEditView->show();
+}
+
+void mainview::reshow()
+{
+    this->show();
+}
