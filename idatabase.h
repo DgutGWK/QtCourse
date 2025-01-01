@@ -43,7 +43,25 @@ public:
     bool submitPatientEdit();
     void revertPatientEdit();
     QSqlTableModel *patientTabModel;     //数据模型
-    QItemSelectionModel *thePatientSelection;
+    QItemSelectionModel *thePatientSelection;     //选择模型
+
+    bool initDrugModel();
+    int addNewDrug();
+    bool searchDrug(QString filter);
+    void deleteCurrentDrug();
+    bool submitDrugEdit();
+    void revertDrugEdit();
+    QSqlTableModel *drugTabModel;     //数据模型
+    QItemSelectionModel *theDrugSelection;     //选择模型
+
+    bool initTreatRecordModel();
+    int addNewTreatRecord();
+    bool searchTreatRecord(QString filter);
+    void deleteCurrentTreatRecord();
+    bool submitTreatRecordEdit();
+    void revertTreatRecordEdit();
+    QSqlTableModel *TreatRecordTabModel;     //数据模型
+    QItemSelectionModel *theTreatRecordSelection;     //选择模型
 };
 
 #endif // IDATABASE_H

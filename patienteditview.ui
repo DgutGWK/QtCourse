@@ -94,7 +94,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBoxSex">
+        <widget class="QComboBox" name="Sex">
          <item>
           <property name="text">
            <string>男</string>
@@ -283,7 +283,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBox_5">
+        <widget class="QComboBox" name="CertificateType">
          <item>
           <property name="text">
            <string>中华人民共和国居民身份证</string>
@@ -339,7 +339,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_6"/>
+        <widget class="QLineEdit" name="CertificateNumber"/>
        </item>
       </layout>
      </item>
@@ -393,7 +393,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_7"/>
+        <widget class="QLineEdit" name="Email"/>
        </item>
       </layout>
      </item>

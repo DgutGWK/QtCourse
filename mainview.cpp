@@ -1,7 +1,5 @@
 #include "mainview.h"
 #include "ui_mainview.h"
-#include "drugeditview.h"
-#include "treatrecordeditview.h"
 #include "idatabase.h"
 
 mainview::mainview(QWidget *parent)
@@ -16,14 +14,25 @@ mainview::mainview(QWidget *parent)
     ui->DoctorMessageView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->DoctorMessageView->setAlternatingRowColors(true);
 
-    IDatabase &iDatabase = IDatabase::getInstance();
-    if (iDatabase.initDoctorModel()) {
-        ui->DoctorMessageView->setModel(iDatabase.doctorTabModel);
-        ui->DoctorMessageView->setSelectionModel(iDatabase.theDoctorSelection);
-    }
+    ui->PatientMessageView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->PatientMessageView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->PatientMessageView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->PatientMessageView->setAlternatingRowColors(true);
+
+    ui->DrugMessageView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->DrugMessageView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->DrugMessageView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->DrugMessageView->setAlternatingRowColors(true);
+
+    ui->TreatRecordMessageView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->TreatRecordMessageView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->TreatRecordMessageView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->TreatRecordMessageView->setAlternatingRowColors(true);
 
     connect(this, SIGNAL(goDoctorEditViewSuccess(int)), this, SLOT(goDoctorEditView(int)));
     connect(this, SIGNAL(goPatientEditViewSuccess(int)), this, SLOT(goPatientEditView(int)));
+    connect(this, SIGNAL(goDrugEditViewSuccess(int)), this, SLOT(goDrugEditView(int)));
+    connect(this, SIGNAL(goTreatRecordEditViewSuccess(int)), this, SLOT(goTreatRecordEditView(int)));
 }
 
 mainview::~mainview()
@@ -100,9 +109,10 @@ void mainview::on_ActionPatientcomboBox_activated(int index)
         int currow = IDatabase::getInstance().addNewPatient();
         emit goPatientEditViewSuccess(currow);
     } else if (index == 1) {
-
+        QModelIndex curIndex = IDatabase::getInstance().thePatientSelection->currentIndex();
+        emit goPatientEditView(curIndex.row());
     } else if (index == 2) {
-
+        IDatabase::getInstance().deleteCurrentPatient();
     } else if (index == 3) {
 
     } else {
@@ -113,14 +123,15 @@ void mainview::on_ActionPatientcomboBox_activated(int index)
 
 void mainview::on_ActionDrugcomboBox_activated(int index)
 {
-    index = ui->ActionPatientcomboBox->currentIndex();
+    index = ui->ActionDrugcomboBox->currentIndex();
     if (index == 0) {
-        DrugEditView *view = new DrugEditView;
-        view->show();
+        int currow = IDatabase::getInstance().addNewDrug();
+        emit goDrugEditViewSuccess(currow);
     } else if (index == 1) {
-
+        QModelIndex curIndex = IDatabase::getInstance().theDrugSelection->currentIndex();
+        emit goDrugEditView(curIndex.row());
     } else if (index == 2) {
-
+        IDatabase::getInstance().deleteCurrentDrug();
     } else if (index == 3) {
 
     } else {
@@ -133,12 +144,13 @@ void mainview::on_ActionTreatRecordcomboBox_activated(int index)
 {
     index = ui->ActionTreatRecordcomboBox->currentIndex();
     if (index == 0) {
-        TreatRecordEditView *view = new TreatRecordEditView;
-        view->show();
+        int currow = IDatabase::getInstance().addNewTreatRecord();
+        emit goTreatRecordEditViewSuccess(currow);
     } else if (index == 1) {
-
+        QModelIndex curIndex = IDatabase::getInstance().theTreatRecordSelection->currentIndex();
+        emit goTreatRecordEditView(curIndex.row());
     } else if (index == 2) {
-
+        IDatabase::getInstance().deleteCurrentTreatRecord();
     } else if (index == 3) {
 
     } else {
@@ -177,7 +189,42 @@ void mainview::goPatientEditView(int rowNo)
     patientEditView->show();
 }
 
+void mainview::goDrugEditView(int rowNo)
+{
+    qDebug() << "goDrugEditView";
+    drugEditView = new DrugEditView(this, rowNo);
+    connect(drugEditView, SIGNAL(goPreviousView()), this, SLOT(reshow()));
+    drugEditView->show();
+}
+
+void mainview::goTreatRecordEditView(int rowNo)
+{
+    qDebug() << "goTreatRecordEditView";
+    treatRecordEditView = new TreatRecordEditView(this, rowNo);
+    connect(treatRecordEditView, SIGNAL(goPreviousView()), this, SLOT(reshow()));
+    treatRecordEditView->show();
+}
+
 void mainview::reshow()
 {
     this->show();
 }
+
+void mainview::on_tabWidget_currentChanged(int index)
+{
+    IDatabase &iDatabase = IDatabase::getInstance();
+    if (index == 0 && iDatabase.initDoctorModel()) {
+        ui->DoctorMessageView->setModel(iDatabase.doctorTabModel);
+        ui->DoctorMessageView->setSelectionModel(iDatabase.theDoctorSelection);
+    } else if (index == 1 && iDatabase.initPatientModel()) {
+        ui->PatientMessageView->setModel(iDatabase.patientTabModel);
+        ui->PatientMessageView->setSelectionModel(iDatabase.thePatientSelection);
+    } else if (index == 2 && iDatabase.initDrugModel()) {
+        ui->DrugMessageView->setModel(iDatabase.drugTabModel);
+        ui->DrugMessageView->setSelectionModel(iDatabase.theDrugSelection);
+    } else if (index == 3 && iDatabase.initTreatRecordModel()) {
+        ui->TreatRecordMessageView->setModel(iDatabase.TreatRecordTabModel);
+        ui->TreatRecordMessageView->setSelectionModel(iDatabase.theTreatRecordSelection);
+    }
+}
+

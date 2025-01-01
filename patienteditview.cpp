@@ -16,7 +16,7 @@ PatientEditView::PatientEditView(QWidget *parent, int index)
     dataMapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit); // 设置自动提交策略
 
     // 将UI组件与数据库表模型的字段进行映射
-    dataMapper->addMapping(ui->PatientName, tabModel->fieldIndex("DoctorName"));
+    dataMapper->addMapping(ui->PatientName, tabModel->fieldIndex("PatientName"));
     dataMapper->addMapping(ui->Sex, tabModel->fieldIndex("Sex"));
     dataMapper->addMapping(ui->Ration, tabModel->fieldIndex("Ration"));
     dataMapper->addMapping(ui->Age, tabModel->fieldIndex("Age"));
@@ -27,7 +27,8 @@ PatientEditView::PatientEditView(QWidget *parent, int index)
     dataMapper->addMapping(ui->Place, tabModel->fieldIndex("Place"));
     dataMapper->addMapping(ui->Phone, tabModel->fieldIndex("Phone"));
     dataMapper->addMapping(ui->Email, tabModel->fieldIndex("Email"));
-
+    // 设置当前索引，用于定位到特定的数据记录
+    dataMapper->setCurrentIndex(index);
 }
 
 PatientEditView::~PatientEditView()

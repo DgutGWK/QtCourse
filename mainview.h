@@ -7,6 +7,8 @@
 #include <QPainter>
 #include "doctoreditview.h"
 #include "patienteditview.h"
+#include "drugeditview.h"
+#include "treatrecordeditview.h"
 
 namespace Ui {
 class mainview;
@@ -33,20 +35,28 @@ private slots:
 
     void on_SearchDoctorButton_clicked();
 
+    void on_tabWidget_currentChanged(int index);
+
 public slots:
     void goDoctorEditView(int rowNo);
     void goPatientEditView(int rowNo);
+    void goDrugEditView(int rowNo);
+    void goTreatRecordEditView(int rowNo);
     void reshow();
 
 signals:
     void backSuccess();
     void goDoctorEditViewSuccess(int idx);
     void goPatientEditViewSuccess(int idx);
+    void goDrugEditViewSuccess(int idx);
+    void goTreatRecordEditViewSuccess(int idx);
 
 private:
     Ui::mainview *ui;
     DoctorEditView *doctorEditView;
     PatientEditView *patientEditView;
+    DrugEditView *drugEditView;
+    TreatRecordEditView *treatRecordEditView;
 };
 
 //自定义tabbar的样式

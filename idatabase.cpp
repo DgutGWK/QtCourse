@@ -109,6 +109,104 @@ void IDatabase::revertPatientEdit()
     patientTabModel->revertAll();
 }
 
+bool IDatabase::initDrugModel()
+{
+    drugTabModel = new QSqlTableModel(this, database);
+    drugTabModel->setTable("drug");
+    drugTabModel->setEditStrategy(
+        QSqlTableModel::OnManualSubmit);     //数据保存方式，OnManualSubmit，OnRowChange
+    drugTabModel->setSort(drugTabModel->fieldIndex("DrugId"), Qt::AscendingOrder);     //排序
+    if (!(drugTabModel->select()))     //查询数据
+        return false;
+    theDrugSelection = new QItemSelectionModel(drugTabModel);
+    return true;
+}
+
+int IDatabase::addNewDrug()
+{
+    drugTabModel->insertRow(drugTabModel->rowCount(), QModelIndex());
+    QModelIndex curIndex = drugTabModel->index(drugTabModel->rowCount() - 1, 1);
+    int curRecNo = curIndex.row();
+    QSqlRecord curRec = drugTabModel->record(curRecNo);
+    curRec.setValue("CREATEDTIMESTAMP", QDateTime::currentDateTime().toString("yyyy-MM-dd"));
+    curRec.setValue("ID", QUuid::createUuid().toString(QUuid::WithoutBraces));
+    drugTabModel->setRecord(curRecNo, curRec);
+    return curIndex.row();
+}
+
+bool IDatabase::searchDrug(QString filter)
+{
+    drugTabModel->setFilter(filter);
+    return drugTabModel->select();
+}
+
+void IDatabase::deleteCurrentDrug()
+{
+    QModelIndex curIndex = theDrugSelection->currentIndex();     //获取当前选择单元格的模型索引
+    drugTabModel->removeRow(curIndex.row());
+    drugTabModel->submitAll();
+    drugTabModel->select();
+}
+
+bool IDatabase::submitDrugEdit()
+{
+    return drugTabModel->submitAll();
+}
+
+void IDatabase::revertDrugEdit()
+{
+    drugTabModel->revertAll();
+}
+
+bool IDatabase::initTreatRecordModel()
+{
+    TreatRecordTabModel = new QSqlTableModel(this, database);
+    TreatRecordTabModel->setTable("record");
+    TreatRecordTabModel->setEditStrategy(
+        QSqlTableModel::OnManualSubmit);     //数据保存方式，OnManualSubmit，OnRowChange
+    TreatRecordTabModel->setSort(TreatRecordTabModel->fieldIndex("RecordId"), Qt::AscendingOrder);     //排序
+    if (!(TreatRecordTabModel->select()))     //查询数据
+        return false;
+    theTreatRecordSelection = new QItemSelectionModel(drugTabModel);
+    return true;
+}
+
+int IDatabase::addNewTreatRecord()
+{
+    TreatRecordTabModel->insertRow(TreatRecordTabModel->rowCount(), QModelIndex());
+    QModelIndex curIndex = TreatRecordTabModel->index(TreatRecordTabModel->rowCount() - 1, 1);
+    int curRecNo = curIndex.row();
+    QSqlRecord curRec = TreatRecordTabModel->record(curRecNo);
+    curRec.setValue("CREATEDTIMESTAMP", QDateTime::currentDateTime().toString("yyyy-MM-dd"));
+    curRec.setValue("ID", QUuid::createUuid().toString(QUuid::WithoutBraces));
+    TreatRecordTabModel->setRecord(curRecNo, curRec);
+    return curIndex.row();
+}
+
+bool IDatabase::searchTreatRecord(QString filter)
+{
+    TreatRecordTabModel->setFilter(filter);
+    return TreatRecordTabModel->select();
+}
+
+void IDatabase::deleteCurrentTreatRecord()
+{
+    QModelIndex curIndex = theTreatRecordSelection->currentIndex();     //获取当前选择单元格的模型索引
+    TreatRecordTabModel->removeRow(curIndex.row());
+    TreatRecordTabModel->submitAll();
+    TreatRecordTabModel->select();
+}
+
+bool IDatabase::submitTreatRecordEdit()
+{
+    return TreatRecordTabModel->submitAll();
+}
+
+void IDatabase::revertTreatRecordEdit()
+{
+    TreatRecordTabModel->revertAll();
+}
+
 QString IDatabase::userLogin(QString userName, QString password)
 {
     QSqlQuery query;
