@@ -134,8 +134,10 @@ void mainview::on_ActionDrugcomboBox_activated(int index)
         IDatabase::getInstance().deleteCurrentDrug();
     } else if (index == 3) {
         IDatabase::getInstance().importDrugMessage();
-    } else {
+    } else if (index == 4) {
         IDatabase::getInstance().exportDrugMessage();
+    } else {
+        IDatabase::getInstance().showLowStockDrugs();
     }
 }
 
@@ -319,3 +321,30 @@ void mainview::on_SortTreatRecordcomboBox_activated(int index)
                 Qt::DescendingOrder);
     }
 }
+
+void mainview::on_FilterTreatRecordcomboBox_activated(int index)
+{
+    index = ui->FilterTreatRecordcomboBox->currentIndex();
+    QDate currentDate = QDate::currentDate();
+    QString filter;
+    switch (index) {
+    case 0:
+        filter = "TreatDate >= '" + currentDate.addDays(-7).toString("yyyy-MM-dd") + "'";
+        break;
+    case 1:
+        filter = "TreatDate >= '" + currentDate.addDays(-30).toString("yyyy-MM-dd") + "'";
+        break;
+    case 2:
+        filter = "TreatDate >= '" + currentDate.addDays(-365).toString("yyyy-MM-dd") + "'";
+        break;
+    default:
+        filter = "";
+        break;
+    }
+    IDatabase::getInstance().TreatRecordTabModel->setFilter(filter);
+    IDatabase::getInstance().TreatRecordTabModel->select(); // 重新查询数据库
+
+    // 更新视图
+    ui->TreatRecordMessageView->setModel(IDatabase::getInstance().TreatRecordTabModel);
+}
+

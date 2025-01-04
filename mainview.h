@@ -46,6 +46,8 @@ private slots:
 
     void on_SortTreatRecordcomboBox_activated(int index);
 
+    void on_FilterTreatRecordcomboBox_activated(int index);
+
 public slots:
     void goDoctorEditView(int rowNo);
     void goPatientEditView(int rowNo);

@@ -539,7 +539,23 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="FilterTreatRecordcomboBox"/>
+           <widget class="QComboBox" name="FilterTreatRecordcomboBox">
+            <item>
+             <property name="text">
+              <string>近一周的就诊记录</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>近一个月的就诊记录</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>近一年的就诊记录</string>
+             </property>
+            </item>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="ActionTreatRecordlabel">

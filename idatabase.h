@@ -61,6 +61,7 @@ public:
     void revertDrugEdit();
     void exportDrugMessage();
     void importDrugMessage();
+    void showLowStockDrugs();
     QSqlTableModel *drugTabModel;     //数据模型
     QItemSelectionModel *theDrugSelection;     //选择模型
 
@@ -73,6 +74,7 @@ public:
     void exportTreatRecordMessage();
     QSqlTableModel *TreatRecordTabModel;     //数据模型
     QItemSelectionModel *theTreatRecordSelection;     //选择模型
+
 };
 
 #endif // IDATABASE_H

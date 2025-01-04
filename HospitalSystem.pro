@@ -16,6 +16,7 @@ SOURCES += \
     loginview.cpp \
     mainview.cpp \
     patienteditview.cpp \
+    registerview.cpp \
     treatrecordeditview.cpp
 
 HEADERS += \
@@ -25,6 +26,7 @@ HEADERS += \
     loginview.h \
     mainview.h \
     patienteditview.h \
+    registerview.h \
     treatrecordeditview.h
 
 FORMS += \
@@ -33,6 +35,7 @@ FORMS += \
     loginview.ui \
     mainview.ui \
     patienteditview.ui \
+    registerview.ui \
     treatrecordeditview.ui
 
 # QXlsx code for Application Qt project

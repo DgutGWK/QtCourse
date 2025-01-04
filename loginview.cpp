@@ -43,3 +43,12 @@ void loginview::on_btSignin_clicked()
         emit loginSuccess();
 }
 
+
+void loginview::on_btSignUp_clicked()
+{
+    qDebug() << "goRegisterView";
+    registerview = new RegisterView(this);
+    connect(registerview, SIGNAL(backSuccess()), this, SLOT(reshow()));
+    registerview->show();
+}
+
