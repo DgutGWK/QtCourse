@@ -1,4 +1,5 @@
 #include "idatabase.h"
+#include "qapplication.h"
 
 void IDatabase::ininDatabase()
 {
@@ -60,6 +61,105 @@ void IDatabase::revertDoctorEdit()
     doctorTabModel->revertAll();
 }
 
+void IDatabase::exportDoctorMessage()
+{
+    QSqlQuery query;
+    if (!query.exec("SELECT * FROM doctor")) {
+        qDebug() << "Database query failed:" << query.lastError();
+        return;
+    }
+
+    QXlsx::Document xlsx;
+    int row = 1;
+
+    // 添加列标题
+    xlsx.write(row, 1, "Id");
+    xlsx.write(row, 2, "DoctorName");
+    xlsx.write(row, 3, "Sex");
+    row++;
+
+    while (query.next()) {
+        QString Id = query.value(0).toString();
+        QString DoctorName = query.value(1).toString();
+        QString Sex = query.value(2).toString();
+
+        xlsx.write(row, 1, Id);
+        xlsx.write(row, 2, DoctorName);
+        xlsx.write(row, 3, Sex);
+        row++;
+    }
+
+    QApplication::setQuitOnLastWindowClosed(false);
+    // 弹出选择文件保存路径的对话框
+    QString fileName = QFileDialog::getSaveFileName(nullptr, "Save Excel File", "", "Excel Files (*.xlsx)");
+    if (fileName.isEmpty()) {
+        // 用户取消操作，不执行任何操作
+        QApplication::setQuitOnLastWindowClosed(false);
+    } else {
+        if (!xlsx.saveAs(fileName)) {
+            qDebug() << "Failed to save Excel file.";
+            QApplication::setQuitOnLastWindowClosed(false);
+            QMessageBox::warning(nullptr, "Warning", "Failed to save Excel file.");
+        } else {
+            QApplication::setQuitOnLastWindowClosed(false);
+            QMessageBox::information(nullptr, "Success", "Export successful.");
+        }
+    }
+}
+
+void IDatabase::importDoctorMessage()
+{
+    QApplication::setQuitOnLastWindowClosed(false);
+    // 弹出选择文件打开路径的对话框
+    QString fileName = QFileDialog::getOpenFileName(nullptr, "Open Excel File", "", "Excel Files (*.xlsx)");
+    if (fileName.isEmpty()) {
+        // 用户取消操作，不执行任何操作
+        QApplication::setQuitOnLastWindowClosed(false);
+        return;
+    }
+
+    QXlsx::Document xlsx(fileName);
+    bool importSuccess = true; // 假设导入成功，除非遇到错误
+
+    // 读取Excel文件并导入数据
+    try {
+        int row = 2; // 假设第一行是标题行，从第二行开始读取数据
+        QSqlQuery query;
+
+        // 准备插入语句，这里需要根据您的数据库表结构来编写
+        query.prepare("INSERT INTO doctor (Id, DoctorName, Sex) VALUES (:Id, :DoctorName, :Sex)");
+
+        while (xlsx.dimension().rowCount() >= row) {
+            QString Id = xlsx.read(row, 1).toString();
+            QString DoctorName = xlsx.read(row, 2).toString();
+            QString Sex = xlsx.read(row, 3).toString();
+
+            query.bindValue(":Id", Id);
+            query.bindValue(":DoctorName", DoctorName);
+            query.bindValue(":Sex", Sex);
+
+            if (!query.exec()) {
+                qDebug() << "Database query failed:" << query.lastError();
+                importSuccess = false;
+                break; // 遇到错误时停止导入
+            }
+            row++;
+        }
+    } catch (const std::exception& e) {
+        qDebug() << "Error reading Excel file:" << e.what();
+        importSuccess = false;
+    }
+
+    // 根据导入结果显示提示信息
+    if (importSuccess) {
+        QApplication::setQuitOnLastWindowClosed(false);
+        QMessageBox::information(nullptr, "Success", "Import successful.");
+    } else {
+        QApplication::setQuitOnLastWindowClosed(false);
+        QMessageBox::warning(nullptr, "Warning", "Failed to import Excel file.");
+    }
+}
+
 bool IDatabase::initPatientModel()
 {
     patientTabModel = new QSqlTableModel(this, database);
@@ -107,6 +207,105 @@ bool IDatabase::submitPatientEdit()
 void IDatabase::revertPatientEdit()
 {
     patientTabModel->revertAll();
+}
+
+void IDatabase::exportPatientMessage()
+{
+    QApplication::setQuitOnLastWindowClosed(false);
+    QSqlQuery query;
+    if (!query.exec("SELECT * FROM patient")) {
+        qDebug() << "Database query failed:" << query.lastError();
+        return;
+    }
+
+    QXlsx::Document xlsx;
+    int row = 1;
+
+    // 添加列标题
+    xlsx.write(row, 1, "Id");
+    xlsx.write(row, 2, "PatientName");
+    xlsx.write(row, 3, "Sex");
+    row++;
+
+    while (query.next()) {
+        QString Id = query.value(0).toString();
+        QString PatientName = query.value(1).toString();
+        QString Sex = query.value(2).toString();
+
+        xlsx.write(row, 1, Id);
+        xlsx.write(row, 2, PatientName);
+        xlsx.write(row, 3, Sex);
+        row++;
+    }
+
+    // 弹出选择文件保存路径的对话框
+    QString fileName = QFileDialog::getSaveFileName(nullptr, "Save Excel File", "", "Excel Files (*.xlsx)");
+    if (fileName.isEmpty()) {
+        // 用户取消操作，不执行任何操作
+        QApplication::setQuitOnLastWindowClosed(false);
+    } else {
+        if (!xlsx.saveAs(fileName)) {
+            qDebug() << "Failed to save Excel file.";
+            QApplication::setQuitOnLastWindowClosed(false);
+            QMessageBox::warning(nullptr, "Warning", "Failed to save Excel file.");
+        } else {
+            QApplication::setQuitOnLastWindowClosed(false);
+            QMessageBox::information(nullptr, "Success", "Export successful.");
+        }
+    }
+}
+
+void IDatabase::importPatientMessage()
+{
+    QApplication::setQuitOnLastWindowClosed(false);
+    // 弹出选择文件打开路径的对话框
+    QString fileName = QFileDialog::getOpenFileName(nullptr, "Open Excel File", "", "Excel Files (*.xlsx)");
+    if (fileName.isEmpty()) {
+        // 用户取消操作，不执行任何操作
+        QApplication::setQuitOnLastWindowClosed(false);
+        return;
+    }
+
+    QXlsx::Document xlsx(fileName);
+    bool importSuccess = true; // 假设导入成功，除非遇到错误
+
+    // 读取Excel文件并导入数据
+    try {
+        int row = 2; // 假设第一行是标题行，从第二行开始读取数据
+        QSqlQuery query;
+
+        // 准备插入语句，这里需要根据您的数据库表结构来编写
+        query.prepare("INSERT INTO patient (Id, PatientName, Sex) VALUES (:Id, :PatientName, :Sex)");
+
+        while (xlsx.dimension().rowCount() >= row) {
+            QString Id = xlsx.read(row, 1).toString();
+            QString PatientName = xlsx.read(row, 2).toString();
+            QString Sex = xlsx.read(row, 3).toString();
+
+            query.bindValue(":Id", Id);
+            query.bindValue(":PatientName", PatientName);
+            query.bindValue(":Sex", Sex);
+
+            if (!query.exec()) {
+                qDebug() << "Database query failed:" << query.lastError();
+                importSuccess = false;
+                break; // 遇到错误时停止导入
+            }
+            row++;
+        }
+    } catch (const std::exception& e) {
+        qDebug() << "Error reading Excel file:" << e.what();
+        importSuccess = false;
+    }
+
+    // 根据导入结果显示提示信息
+    if (importSuccess) {
+        QApplication::setQuitOnLastWindowClosed(false);
+        QMessageBox::information(nullptr, "Success", "Import successful.");
+    } else {
+        QApplication::setQuitOnLastWindowClosed(false);
+        QMessageBox::warning(nullptr, "Warning", "Failed to import Excel file.");
+    }
 }
 
 bool IDatabase::initDrugModel()
@@ -158,6 +357,100 @@ void IDatabase::revertDrugEdit()
     drugTabModel->revertAll();
 }
 
+void IDatabase::exportDrugMessage()
+{
+    QSqlQuery query;
+    if (!query.exec("SELECT * FROM drug")) {
+        qDebug() << "Database query failed:" << query.lastError();
+        return;
+    }
+
+    QXlsx::Document xlsx;
+    int row = 1;
+
+    // 添加列标题
+    xlsx.write(row, 1, "DrugId");
+    xlsx.write(row, 2, "DrugName");
+    row++;
+
+    while (query.next()) {
+        QString DrugId = query.value(0).toString();
+        QString DrugName = query.value(1).toString();
+
+        xlsx.write(row, 1, DrugId);
+        xlsx.write(row, 2, DrugName);
+        row++;
+    }
+
+    QApplication::setQuitOnLastWindowClosed(false);
+    // 弹出选择文件保存路径的对话框
+    QString fileName = QFileDialog::getSaveFileName(nullptr, "Save Excel File", "", "Excel Files (*.xlsx)");
+    if (fileName.isEmpty()) {
+        // 用户取消操作，不执行任何操作
+        QApplication::setQuitOnLastWindowClosed(false);
+    } else {
+        if (!xlsx.saveAs(fileName)) {
+            qDebug() << "Failed to save Excel file.";
+            QApplication::setQuitOnLastWindowClosed(false);
+            QMessageBox::warning(nullptr, "Warning", "Failed to save Excel file.");
+        } else {
+            QApplication::setQuitOnLastWindowClosed(false);
+            QMessageBox::information(nullptr, "Success", "Export successful.");
+        }
+    }
+}
+
+void IDatabase::importDrugMessage()
+{
+    QApplication::setQuitOnLastWindowClosed(false);
+    // 弹出选择文件打开路径的对话框
+    QString fileName = QFileDialog::getOpenFileName(nullptr, "Open Excel File", "", "Excel Files (*.xlsx)");
+    if (fileName.isEmpty()) {
+        // 用户取消操作，不执行任何操作
+        QApplication::setQuitOnLastWindowClosed(false);
+        return;
+    }
+
+    QXlsx::Document xlsx(fileName);
+    bool importSuccess = true; // 假设导入成功，除非遇到错误
+
+    // 读取Excel文件并导入数据
+    try {
+        int row = 2; // 假设第一行是标题行，从第二行开始读取数据
+        QSqlQuery query;
+
+        // 准备插入语句，这里需要根据您的数据库表结构来编写
+        query.prepare("INSERT INTO patient (DrugId, DrugName) VALUES (:DrugId, :DrugName)");
+
+        while (xlsx.dimension().rowCount() >= row) {
+            QString DrugId = xlsx.read(row, 1).toString();
+            QString DrugName = xlsx.read(row, 2).toString();
+
+            query.bindValue(":DrugId", DrugId);
+            query.bindValue(":DrugName", DrugName);
+
+            if (!query.exec()) {
+                qDebug() << "Database query failed:" << query.lastError();
+                importSuccess = false;
+                break; // 遇到错误时停止导入
+            }
+            row++;
+        }
+    } catch (const std::exception& e) {
+        qDebug() << "Error reading Excel file:" << e.what();
+        importSuccess = false;
+    }
+
+    // 根据导入结果显示提示信息
+    if (importSuccess) {
+        QApplication::setQuitOnLastWindowClosed(false);
+        QMessageBox::information(nullptr, "Success", "Import successful.");
+    } else {
+        QApplication::setQuitOnLastWindowClosed(false);
+        QMessageBox::warning(nullptr, "Warning", "Failed to import Excel file.");
+    }
+}
+
 bool IDatabase::initTreatRecordModel()
 {
     TreatRecordTabModel = new QSqlTableModel(this, database);
@@ -167,7 +460,7 @@ bool IDatabase::initTreatRecordModel()
     TreatRecordTabModel->setSort(TreatRecordTabModel->fieldIndex("RecordId"), Qt::AscendingOrder);     //排序
     if (!(TreatRecordTabModel->select()))     //查询数据
         return false;
-    theTreatRecordSelection = new QItemSelectionModel(drugTabModel);
+    theTreatRecordSelection = new QItemSelectionModel(TreatRecordTabModel);
     return true;
 }
 
@@ -178,7 +471,7 @@ int IDatabase::addNewTreatRecord()
     int curRecNo = curIndex.row();
     QSqlRecord curRec = TreatRecordTabModel->record(curRecNo);
     curRec.setValue("CREATEDTIMESTAMP", QDateTime::currentDateTime().toString("yyyy-MM-dd"));
-    curRec.setValue("ID", QUuid::createUuid().toString(QUuid::WithoutBraces));
+    curRec.setValue("RecordId", QUuid::createUuid().toString(QUuid::WithoutBraces));
     TreatRecordTabModel->setRecord(curRecNo, curRec);
     return curIndex.row();
 }
@@ -205,6 +498,52 @@ bool IDatabase::submitTreatRecordEdit()
 void IDatabase::revertTreatRecordEdit()
 {
     TreatRecordTabModel->revertAll();
+}
+
+void IDatabase::exportTreatRecordMessage()
+{
+    QSqlQuery query;
+    if (!query.exec("SELECT * FROM record")) {
+        qDebug() << "Database query failed:" << query.lastError();
+        return;
+    }
+
+    QXlsx::Document xlsx;
+    int row = 1;
+
+    // 添加列标题
+    xlsx.write(row, 1, "RecordId");
+    xlsx.write(row, 2, "DoctorName");
+    xlsx.write(row, 3, "PatientName");
+    row++;
+
+    while (query.next()) {
+        QString RecordId = query.value(0).toString();
+        QString DoctorName = query.value(1).toString();
+        QString PatientName = query.value(2).toString();
+
+        xlsx.write(row, 1, RecordId);
+        xlsx.write(row, 2, DoctorName);
+        xlsx.write(row, 3, PatientName);
+        row++;
+    }
+
+    QApplication::setQuitOnLastWindowClosed(false);
+    // 弹出选择文件保存路径的对话框
+    QString fileName = QFileDialog::getSaveFileName(nullptr, "Save Excel File", "", "Excel Files (*.xlsx)");
+    if (fileName.isEmpty()) {
+        // 用户取消操作，不执行任何操作
+        QApplication::setQuitOnLastWindowClosed(false);
+    } else {
+        if (!xlsx.saveAs(fileName)) {
+            qDebug() << "Failed to save Excel file.";
+            QApplication::setQuitOnLastWindowClosed(false);
+            QMessageBox::warning(nullptr, "Warning", "Failed to save Excel file.");
+        } else {
+            QApplication::setQuitOnLastWindowClosed(false);
+            QMessageBox::information(nullptr, "Success", "Export successful.");
+        }
+    }
 }
 
 QString IDatabase::userLogin(QString userName, QString password)

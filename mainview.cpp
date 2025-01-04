@@ -95,9 +95,9 @@ void mainview::on_ActionDoctorcomboBox_activated(int index)
     } else if (index == 2) {
         IDatabase::getInstance().deleteCurrentDoctor();
     } else if (index == 3) {
-
+        IDatabase::getInstance().importDoctorMessage();
     } else {
-
+        IDatabase::getInstance().exportDoctorMessage();
     }
 }
 
@@ -114,9 +114,9 @@ void mainview::on_ActionPatientcomboBox_activated(int index)
     } else if (index == 2) {
         IDatabase::getInstance().deleteCurrentPatient();
     } else if (index == 3) {
-
+        IDatabase::getInstance().importPatientMessage();
     } else {
-
+        IDatabase::getInstance().exportPatientMessage();
     }
 }
 
@@ -133,9 +133,9 @@ void mainview::on_ActionDrugcomboBox_activated(int index)
     } else if (index == 2) {
         IDatabase::getInstance().deleteCurrentDrug();
     } else if (index == 3) {
-
+        IDatabase::getInstance().importDrugMessage();
     } else {
-
+        IDatabase::getInstance().exportDrugMessage();
     }
 }
 
@@ -151,10 +151,8 @@ void mainview::on_ActionTreatRecordcomboBox_activated(int index)
         emit goTreatRecordEditView(curIndex.row());
     } else if (index == 2) {
         IDatabase::getInstance().deleteCurrentTreatRecord();
-    } else if (index == 3) {
-
     } else {
-
+        IDatabase::getInstance().exportTreatRecordMessage();
     }
 }
 
@@ -228,3 +226,96 @@ void mainview::on_tabWidget_currentChanged(int index)
     }
 }
 
+
+void mainview::on_SortDoctorcomboBox_activated(int index)
+{
+    index = ui->SortDoctorcomboBox->currentIndex();
+    ui->DoctorMessageView->setSortingEnabled(true);
+    if (index == 0) {
+        ui->DoctorMessageView->sortByColumn(IDatabase::getInstance().doctorTabModel->fieldIndex("Age"), Qt::AscendingOrder);
+    } else if (index == 1) {
+        ui->DoctorMessageView->sortByColumn(IDatabase::getInstance().doctorTabModel->fieldIndex("Age"), Qt::DescendingOrder);
+    } else if (index == 2) {
+        ui->DoctorMessageView->sortByColumn(IDatabase::getInstance().doctorTabModel->fieldIndex("Height"), Qt::AscendingOrder);
+    } else if (index == 3) {
+        ui->DoctorMessageView->sortByColumn(IDatabase::getInstance().doctorTabModel->fieldIndex("Height"), Qt::DescendingOrder);
+    } else if (index == 4) {
+        ui->DoctorMessageView->sortByColumn(IDatabase::getInstance().doctorTabModel->fieldIndex("Weight"), Qt::AscendingOrder);
+    } else if (index == 5) {
+        ui->DoctorMessageView->sortByColumn(IDatabase::getInstance().doctorTabModel->fieldIndex("Weight"), Qt::DescendingOrder);
+    } else if (index == 6) {
+        ui->DoctorMessageView->sortByColumn(IDatabase::getInstance().doctorTabModel->fieldIndex("EntryTime"),
+                                            Qt::AscendingOrder);
+    } else {
+        ui->DoctorMessageView->sortByColumn(IDatabase::getInstance().doctorTabModel->fieldIndex("EntryTime"),
+                                            Qt::DescendingOrder);
+    }
+}
+
+
+void mainview::on_SortPatientcomboBox_activated(int index)
+{
+    index = ui->SortPatientcomboBox->currentIndex();
+    ui->PatientMessageView->setSortingEnabled(true);
+    if (index == 0) {
+        ui->PatientMessageView->sortByColumn(IDatabase::getInstance().patientTabModel->fieldIndex("Age"), Qt::AscendingOrder);
+    } else if (index == 1) {
+        ui->PatientMessageView->sortByColumn(IDatabase::getInstance().patientTabModel->fieldIndex("Age"), Qt::DescendingOrder);
+    } else if (index == 2) {
+        ui->PatientMessageView->sortByColumn(IDatabase::getInstance().patientTabModel->fieldIndex("Height"),
+                                             Qt::AscendingOrder);
+    } else if (index == 3) {
+        ui->PatientMessageView->sortByColumn(IDatabase::getInstance().patientTabModel->fieldIndex("Height"),
+                                             Qt::DescendingOrder);
+    } else if (index == 4) {
+        ui->PatientMessageView->sortByColumn(IDatabase::getInstance().patientTabModel->fieldIndex("Weight"),
+                                             Qt::AscendingOrder);
+    } else {
+        ui->PatientMessageView->sortByColumn(IDatabase::getInstance().patientTabModel->fieldIndex("Weight"),
+                                             Qt::DescendingOrder);
+    }
+}
+
+
+void mainview::on_SortDrugcomboBox_activated(int index)
+{
+    index = ui->SortDrugcomboBox->currentIndex();
+    ui->DrugMessageView->setSortingEnabled(true);
+    if (index == 0) {
+        ui->DrugMessageView->sortByColumn(IDatabase::getInstance().drugTabModel->fieldIndex("InventoryNumber"),
+                                          Qt::AscendingOrder);
+    } else if (index == 1) {
+        ui->DrugMessageView->sortByColumn(IDatabase::getInstance().drugTabModel->fieldIndex("InventoryNumber"),
+                                          Qt::DescendingOrder);
+    } else if (index == 2) {
+        ui->DrugMessageView->sortByColumn(IDatabase::getInstance().drugTabModel->fieldIndex("ExpirationDate"),
+                                          Qt::AscendingOrder);
+    } else if (index == 3) {
+        ui->DrugMessageView->sortByColumn(IDatabase::getInstance().drugTabModel->fieldIndex("ExpirationDate"),
+                                          Qt::DescendingOrder);
+    } else if (index == 4) {
+        ui->DrugMessageView->sortByColumn(IDatabase::getInstance().drugTabModel->fieldIndex("EntryTime"), Qt::AscendingOrder);
+    } else if (index == 5) {
+        ui->DrugMessageView->sortByColumn(IDatabase::getInstance().drugTabModel->fieldIndex("EntryTime"), Qt::DescendingOrder);
+    } else if (index == 6) {
+        ui->DrugMessageView->sortByColumn(IDatabase::getInstance().drugTabModel->fieldIndex("DeliveryTime"),
+                                          Qt::AscendingOrder);
+    } else {
+        ui->DrugMessageView->sortByColumn(IDatabase::getInstance().drugTabModel->fieldIndex("DeliveryTime"),
+                                          Qt::DescendingOrder);
+    }
+}
+
+
+void mainview::on_SortTreatRecordcomboBox_activated(int index)
+{
+    index = ui->SortTreatRecordcomboBox->currentIndex();
+    ui->TreatRecordMessageView->setSortingEnabled(true);
+    if (index == 0) {
+        ui->TreatRecordMessageView->sortByColumn(IDatabase::getInstance().TreatRecordTabModel->fieldIndex("TreatDate"),
+                Qt::AscendingOrder);
+    } else {
+        ui->TreatRecordMessageView->sortByColumn(IDatabase::getInstance().TreatRecordTabModel->fieldIndex("TreatDate"),
+                Qt::DescendingOrder);
+    }
+}

@@ -4,6 +4,10 @@
 #include <QObject>
 #include <QtSql>
 #include <QSqlDatabase>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QApplication>
+#include <QXlsx/header/xlsxdocument.h>
 
 class IDatabase : public QObject
 {
@@ -33,6 +37,8 @@ public:
     void deleteCurrentDoctor();
     bool submitDoctorEdit();
     void revertDoctorEdit();
+    void exportDoctorMessage();
+    void importDoctorMessage();
     QSqlTableModel *doctorTabModel;     //数据模型
     QItemSelectionModel *theDoctorSelection;     //选择模型
 
@@ -42,6 +48,8 @@ public:
     void deleteCurrentPatient();
     bool submitPatientEdit();
     void revertPatientEdit();
+    void exportPatientMessage();
+    void importPatientMessage();
     QSqlTableModel *patientTabModel;     //数据模型
     QItemSelectionModel *thePatientSelection;     //选择模型
 
@@ -51,6 +59,8 @@ public:
     void deleteCurrentDrug();
     bool submitDrugEdit();
     void revertDrugEdit();
+    void exportDrugMessage();
+    void importDrugMessage();
     QSqlTableModel *drugTabModel;     //数据模型
     QItemSelectionModel *theDrugSelection;     //选择模型
 
@@ -60,6 +70,7 @@ public:
     void deleteCurrentTreatRecord();
     bool submitTreatRecordEdit();
     void revertTreatRecordEdit();
+    void exportTreatRecordMessage();
     QSqlTableModel *TreatRecordTabModel;     //数据模型
     QItemSelectionModel *theTreatRecordSelection;     //选择模型
 };

@@ -72,3 +72,11 @@ CMakeLists.txt.user*
 *.dll
 *.exe
 
+# QXlsx generated files
+# ---------------------
+# ignore QXlsx generated files
+*.a
+*.so
+*.so.*
+*.o
+*.obj

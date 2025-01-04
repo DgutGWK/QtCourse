@@ -19,6 +19,10 @@ DrugEditView::DrugEditView(QWidget *parent, int index)
     dataMapper->addMapping(ui->Dosage, tabModel->fieldIndex("Dosage"));
     dataMapper->addMapping(ui->InventoryNumber, tabModel->fieldIndex("InventoryNumber"));
     dataMapper->addMapping(ui->DeliveryNumber, tabModel->fieldIndex("DeliveryNumber"));
+    dataMapper->addMapping(ui->ManufactureDate, tabModel->fieldIndex("ManufactureDate"));
+    dataMapper->addMapping(ui->ExpirationDate, tabModel->fieldIndex("ExpirationDate"));
+    dataMapper->addMapping(ui->EntryTime, tabModel->fieldIndex("EntryTime"));
+    dataMapper->addMapping(ui->DeliveryTime, tabModel->fieldIndex("DeliveryTime"));
     // 设置当前索引，用于定位到特定的数据记录
     dataMapper->setCurrentIndex(index);
 }

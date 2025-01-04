@@ -17,6 +17,9 @@ TreatRecordEditView::TreatRecordEditView(QWidget *parent, int index)
     // 将UI组件与数据库表模型的字段进行映射
     dataMapper->addMapping(ui->PatientName, tabModel->fieldIndex("PatientName"));
     dataMapper->addMapping(ui->DoctorName, tabModel->fieldIndex("DoctorName"));
+    dataMapper->addMapping(ui->TreatDate, tabModel->fieldIndex("TreatDate"));
+    dataMapper->addMapping(ui->TreatResult, tabModel->fieldIndex("TreatResult"));
+    dataMapper->addMapping(ui->PrescribeDrug, tabModel->fieldIndex("PrescribeDrug"));
     // 设置当前索引，用于定位到特定的数据记录
     dataMapper->setCurrentIndex(index);
 }

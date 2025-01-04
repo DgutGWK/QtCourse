@@ -1,6 +1,5 @@
 #include "patienteditview.h"
 #include "ui_patienteditview.h"
-#include <QSqlTableModel>
 #include "idatabase.h"
 
 PatientEditView::PatientEditView(QWidget *parent, int index)
@@ -19,11 +18,13 @@ PatientEditView::PatientEditView(QWidget *parent, int index)
     dataMapper->addMapping(ui->PatientName, tabModel->fieldIndex("PatientName"));
     dataMapper->addMapping(ui->Sex, tabModel->fieldIndex("Sex"));
     dataMapper->addMapping(ui->Ration, tabModel->fieldIndex("Ration"));
-    dataMapper->addMapping(ui->Age, tabModel->fieldIndex("Age"));
     dataMapper->addMapping(ui->Height, tabModel->fieldIndex("Height"));
     dataMapper->addMapping(ui->Weight, tabModel->fieldIndex("Weight"));
+    dataMapper->addMapping(ui->Born, tabModel->fieldIndex("Born"));
+    dataMapper->addMapping(ui->Age, tabModel->fieldIndex("Age"));
     dataMapper->addMapping(ui->CertificateType, tabModel->fieldIndex("CertificateType"));
     dataMapper->addMapping(ui->CertificateNumber, tabModel->fieldIndex("CertificateNumber"));
+    dataMapper->addMapping(ui->NativePlace, tabModel->fieldIndex("NativePlace"));
     dataMapper->addMapping(ui->Place, tabModel->fieldIndex("Place"));
     dataMapper->addMapping(ui->Phone, tabModel->fieldIndex("Phone"));
     dataMapper->addMapping(ui->Email, tabModel->fieldIndex("Email"));
@@ -39,12 +40,10 @@ PatientEditView::~PatientEditView()
 void PatientEditView::on_btSavePatientMessage_clicked()
 {
     qDebug() << "goPreviousView";
-    IDatabase::getInstance().submitDoctorEdit();
+    IDatabase::getInstance().submitPatientEdit();
     emit goPreviousView();
     this->close();
 }
-
-
 
 void PatientEditView::on_btCancelPatientMessage_clicked()
 {

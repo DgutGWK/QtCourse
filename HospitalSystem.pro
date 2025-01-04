@@ -35,6 +35,12 @@ FORMS += \
     patienteditview.ui \
     treatrecordeditview.ui
 
+# QXlsx code for Application Qt project
+QXLSX_PARENTPATH=./QXlsx/         # current QXlsx path is . (. means curret directory)
+QXLSX_HEADERPATH=./QXlsx/header/  # current QXlsx header path is ./header/
+QXLSX_SOURCEPATH=./QXlsx/source/  # current QXlsx source path is ./source/
+include(./QXlsx/QXlsx.pri)
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

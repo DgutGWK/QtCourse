@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>765</width>
-    <height>449</height>
+    <width>889</width>
+    <height>528</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -80,16 +80,41 @@
         <layout class="QHBoxLayout" name="horizontalLayout_8">
          <item>
           <widget class="QLabel" name="label">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>姓名：</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="DoctorName"/>
+          <widget class="QLineEdit" name="DoctorName">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QLabel" name="label_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>性别：</string>
            </property>
@@ -97,6 +122,12 @@
          </item>
          <item>
           <widget class="QComboBox" name="Sex">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <item>
             <property name="text">
              <string>男</string>
@@ -111,38 +142,106 @@
          </item>
          <item>
           <widget class="QLabel" name="label_25">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>民族：</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="Ration"/>
+          <widget class="QComboBox" name="Ration">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <item>
+            <property name="text">
+             <string>汉</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>壮</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>维吾尔</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>回</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>苗</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>满</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>彝</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>土家族</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>藏族</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>蒙古族</string>
+            </property>
+           </item>
+          </widget>
          </item>
          <item>
           <widget class="QLabel" name="label_17">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>入职时间：</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="EntryTime_Year"/>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_18">
-           <property name="text">
-            <string>年</string>
+          <widget class="QDateEdit" name="EntryTime">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="EntryTime_Month"/>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_19">
-           <property name="text">
-            <string>月</string>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="calendarPopup">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -164,86 +263,17 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="Born_Year">
+          <widget class="QDateEdit" name="Born">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_7">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>年</string>
+           <property name="calendarPopup">
+            <bool>true</bool>
            </property>
           </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="Born_Month">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_8">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>月</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="Born_Day">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_9">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>日</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Orientation::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
          </item>
          <item>
           <widget class="QLabel" name="label_3">
@@ -261,12 +291,28 @@
          <item>
           <widget class="QSpinBox" name="Age">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
           </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>身高：</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDoubleSpinBox" name="Height"/>
          </item>
         </layout>
        </item>
@@ -286,7 +332,23 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="EducationBackground"/>
+          <widget class="QComboBox" name="EducationBackground">
+           <item>
+            <property name="text">
+             <string>本科</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>硕士</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>博士</string>
+            </property>
+           </item>
+          </widget>
          </item>
          <item>
           <widget class="QLabel" name="label_23">
@@ -302,23 +364,28 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="MaritalStatus"/>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_4">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>身高：</string>
-           </property>
+          <widget class="QComboBox" name="MaritalStatus">
+           <item>
+            <property name="text">
+             <string>未婚</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>已婚</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>离婚</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>丧偶</string>
+            </property>
+           </item>
           </widget>
-         </item>
-         <item>
-          <widget class="QDoubleSpinBox" name="Height"/>
          </item>
          <item>
           <widget class="QLabel" name="label_5">
@@ -377,7 +444,33 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="Department"/>
+          <widget class="QComboBox" name="Department">
+           <item>
+            <property name="text">
+             <string>全科诊室</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>治疗室</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>处置室</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>预防保健室</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>健康信息管理室</string>
+            </property>
+           </item>
+          </widget>
          </item>
          <item>
           <widget class="QLabel" name="label_21">
@@ -393,7 +486,33 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="JobIdentity"/>
+          <widget class="QComboBox" name="JobIdentity">
+           <item>
+            <property name="text">
+             <string>医士</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>住院医师</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>主治医师</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>副主任医师</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>主任医师</string>
+            </property>
+           </item>
+          </widget>
          </item>
         </layout>
        </item>
@@ -485,13 +604,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="NativePlace_Province"/>
-         </item>
-         <item>
-          <widget class="QComboBox" name="NativePlace_City"/>
-         </item>
-         <item>
-          <widget class="QComboBox" name="NativePlace_County"/>
+          <widget class="QLineEdit" name="NativePlace"/>
          </item>
          <item>
           <widget class="QLabel" name="label_11">

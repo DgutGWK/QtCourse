@@ -5,6 +5,7 @@
 #include <QProxyStyle>
 #include <QStyleOptionTab>
 #include <QPainter>
+#include <QSqlQuery>
 #include "doctoreditview.h"
 #include "patienteditview.h"
 #include "drugeditview.h"
@@ -36,6 +37,14 @@ private slots:
     void on_SearchDoctorButton_clicked();
 
     void on_tabWidget_currentChanged(int index);
+
+    void on_SortDoctorcomboBox_activated(int index);
+
+    void on_SortPatientcomboBox_activated(int index);
+
+    void on_SortDrugcomboBox_activated(int index);
+
+    void on_SortTreatRecordcomboBox_activated(int index);
 
 public slots:
     void goDoctorEditView(int rowNo);

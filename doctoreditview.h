@@ -21,18 +21,6 @@ private slots:
 
     void on_btCancelDoctorMessage_clicked();
 
-    void setupBornComboBoxes();
-
-    void initDate();
-
-    void onDateSelected();
-
-    void on_Born_Year_activated(int index);
-
-    void on_Born_Month_activated(int index);
-
-    void on_Born_Day_activated(int index);
-
 signals:
     void goPreviousView();
 
