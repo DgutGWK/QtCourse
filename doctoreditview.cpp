@@ -21,6 +21,8 @@ DoctorEditView::DoctorEditView(QWidget *parent, int index)
     dataMapper->addMapping(ui->EntryTime, tabModel->fieldIndex("EntryTime"));
     dataMapper->addMapping(ui->Born, tabModel->fieldIndex("Born"));
     dataMapper->addMapping(ui->Age, tabModel->fieldIndex("Age"));
+    dataMapper->addMapping(ui->EducationBackground, tabModel->fieldIndex("EducationBackground"));
+    dataMapper->addMapping(ui->MaritalStatus, tabModel->fieldIndex("MaritalStatus"));
     dataMapper->addMapping(ui->Height, tabModel->fieldIndex("Height"));
     dataMapper->addMapping(ui->Weight, tabModel->fieldIndex("Weight"));
     dataMapper->addMapping(ui->JobId, tabModel->fieldIndex("JobId"));

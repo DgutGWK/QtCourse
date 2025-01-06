@@ -181,16 +181,52 @@ void IDatabase::importDoctorMessage()
         QSqlQuery query;
 
         // 准备插入语句，这里需要根据您的数据库表结构来编写
-        query.prepare("INSERT INTO doctor (Id, DoctorName, Sex) VALUES (:Id, :DoctorName, :Sex)");
+        query.prepare("INSERT INTO doctor (Id, DoctorName, Sex, Ration, EntryTime, Born, Age, EducationBackground, MaritalStatus, Height, Weight, JobId, Department, JobIdentity, CertificateType, CertificateNumber, NativePlace, Place, Phone, Email, PractiseCertificate) VALUES (:Id, :DoctorName, :Sex, :Ration, :EntryTime, :Born, :Age, :EducationBackground, :MaritalStatus, :Height, :Weight, :JobId, :Department, :JobIdentity, :CertificateType, :CertificateNumber, :NativePlace, :Place, :Phone, :Email, :PractiseCertificate)");
 
         while (xlsx.dimension().rowCount() >= row) {
-            QString Id = xlsx.read(row, 1).toString();
+            int Id = xlsx.read(row, 1).toInt();
             QString DoctorName = xlsx.read(row, 2).toString();
             QString Sex = xlsx.read(row, 3).toString();
+            QString Ration = xlsx.read(row, 4).toString();
+            QString EntryTime = xlsx.read(row, 5).toString();
+            QString Born = xlsx.read(row, 6).toString();
+            int Age = xlsx.read(row, 7).toInt();
+            QString EducationBackground = xlsx.read(row, 8).toString();
+            QString MaritalStatus = xlsx.read(row, 9).toString();
+            double Height = xlsx.read(row, 10).toDouble();
+            double Weight = xlsx.read(row, 11).toDouble();
+            QString JobId = xlsx.read(row, 12).toString();
+            QString Department = xlsx.read(row, 13).toString();
+            QString JobIdentity = xlsx.read(row, 14).toString();
+            QString CertificateType = xlsx.read(row, 15).toString();
+            QString CertificateNumber = xlsx.read(row, 16).toString();
+            QString NativePlace = xlsx.read(row, 17).toString();
+            QString Place = xlsx.read(row, 18).toString();
+            QString Phone = xlsx.read(row, 19).toString();
+            QString Email = xlsx.read(row, 20).toString();
+            QString PractiseCertificate = xlsx.read(row, 21).toString();
 
             query.bindValue(":Id", Id);
             query.bindValue(":DoctorName", DoctorName);
             query.bindValue(":Sex", Sex);
+            query.bindValue(":Ration", Ration);
+            query.bindValue(":EntryTime", EntryTime);
+            query.bindValue(":Born", Born);
+            query.bindValue(":Age", Age);
+            query.bindValue(":EducationBackground", EducationBackground);
+            query.bindValue(":MaritalStatus", MaritalStatus);
+            query.bindValue(":Height", Height);
+            query.bindValue(":Weight", Weight);
+            query.bindValue(":JobId", JobId);
+            query.bindValue(":Department", Department);
+            query.bindValue(":JobIdentity", JobIdentity);
+            query.bindValue(":CertificateType", CertificateType);
+            query.bindValue(":CertificateNumber", CertificateNumber);
+            query.bindValue(":NativePlace", NativePlace);
+            query.bindValue(":Place", Place);
+            query.bindValue(":Phone", Phone);
+            query.bindValue(":Email", Email);
+            query.bindValue(":PractiseCertificate", PractiseCertificate);
 
             if (!query.exec()) {
                 qDebug() << "Database query failed:" << query.lastError();
@@ -362,16 +398,38 @@ void IDatabase::importPatientMessage()
         QSqlQuery query;
 
         // 准备插入语句，这里需要根据您的数据库表结构来编写
-        query.prepare("INSERT INTO patient (Id, PatientName, Sex) VALUES (:Id, :PatientName, :Sex)");
+        query.prepare("INSERT INTO patient (Id, PatientName, Sex, Ration, Height, Weight, Born, Age, CertificateType, CertificateNumber, NativePlace, Place, Phone, Email) VALUES (:Id, :PatientName, :Sex, :Ration, :Height, :Weight, :Born, :Age, :CertificateType, :CertificateNumber, :NativePlace, :Place, :Phone, :Email)");
 
         while (xlsx.dimension().rowCount() >= row) {
-            QString Id = xlsx.read(row, 1).toString();
+            int Id = xlsx.read(row, 1).toInt();
             QString PatientName = xlsx.read(row, 2).toString();
             QString Sex = xlsx.read(row, 3).toString();
+            QString Ration = xlsx.read(row, 4).toString();
+            double Height = xlsx.read(row, 5).toDouble();
+            double Weight = xlsx.read(row, 6).toDouble();
+            QString Born = xlsx.read(row, 7).toString();
+            int Age = xlsx.read(row, 8).toInt();
+            QString CertificateType = xlsx.read(row, 9).toString();
+            QString CertificateNumber = xlsx.read(row, 10).toString();
+            QString NativePlace = xlsx.read(row, 11).toString();
+            QString Place = xlsx.read(row, 12).toString();
+            QString Phone = xlsx.read(row, 13).toString();
+            QString Email = xlsx.read(row, 14).toString();
 
             query.bindValue(":Id", Id);
             query.bindValue(":PatientName", PatientName);
             query.bindValue(":Sex", Sex);
+            query.bindValue(":Ration", Ration);
+            query.bindValue(":Height", Height);
+            query.bindValue(":Weight", Weight);
+            query.bindValue(":Born", Born);
+            query.bindValue(":Age", Age);
+            query.bindValue(":CertificateType", CertificateType);
+            query.bindValue(":CertificateNumber", CertificateNumber);
+            query.bindValue(":NativePlace", NativePlace);
+            query.bindValue(":Place", Place);
+            query.bindValue(":Phone", Phone);
+            query.bindValue(":Email", Email);
 
             if (!query.exec()) {
                 qDebug() << "Database query failed:" << query.lastError();
@@ -528,14 +586,28 @@ void IDatabase::importDrugMessage()
         QSqlQuery query;
 
         // 准备插入语句，这里需要根据您的数据库表结构来编写
-        query.prepare("INSERT INTO patient (DrugId, DrugName) VALUES (:DrugId, :DrugName)");
+        query.prepare("INSERT INTO drug (DrugId, DrugName, Dosage, InventoryNumber, DeliveryNumber, ManufactureDate, ExpirationDate, EntryTime, DeliveryTime) VALUES (:DrugId, :DrugName, :Dosage, :InventoryNumber, :DeliveryNumber, :ManufactureDate, :ExpirationDate, :EntryTime, :DeliveryTime)");
 
         while (xlsx.dimension().rowCount() >= row) {
             QString DrugId = xlsx.read(row, 1).toString();
             QString DrugName = xlsx.read(row, 2).toString();
+            QString Dosage = xlsx.read(row, 3).toString();
+            QString InventoryNumber = xlsx.read(row, 4).toString();
+            QString DeliveryNumber = xlsx.read(row, 5).toString();
+            QString ManufactureDate = xlsx.read(row, 6).toString();
+            QString ExpirationDate = xlsx.read(row, 7).toString();
+            QString EntryTime = xlsx.read(row, 8).toString();
+            QString DeliveryTime = xlsx.read(row, 9).toString();
 
             query.bindValue(":DrugId", DrugId);
             query.bindValue(":DrugName", DrugName);
+            query.bindValue(":Dosage", Dosage);
+            query.bindValue(":InventoryNumber", InventoryNumber);
+            query.bindValue(":DeliveryNumber", DeliveryNumber);
+            query.bindValue(":ManufactureDate", ManufactureDate);
+            query.bindValue(":ExpirationDate", ExpirationDate);
+            query.bindValue(":EntryTime", EntryTime);
+            query.bindValue(":DeliveryTime", DeliveryTime);
 
             if (!query.exec()) {
                 qDebug() << "Database query failed:" << query.lastError();

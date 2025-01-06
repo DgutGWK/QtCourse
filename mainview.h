@@ -48,6 +48,12 @@ private slots:
 
     void on_FilterTreatRecordcomboBox_activated(int index);
 
+    void on_SearchPatientButton_clicked();
+
+    void on_SearchDrugButton_clicked();
+
+    void on_SearchTreatRecordButton_clicked();
+
 public slots:
     void goDoctorEditView(int rowNo);
     void goPatientEditView(int rowNo);

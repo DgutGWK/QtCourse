@@ -169,7 +169,28 @@ void mainview::on_backButton_clicked()
 
 void mainview::on_SearchDoctorButton_clicked()
 {
-    QString filter = QString("doctorname like '%%1%'").arg(ui->SearchDoctorEdit->text());
+    QString filter = QString("Id LIKE '%%%1%%' OR "
+                             "DoctorName LIKE '%%%1%%' OR "
+                             "Sex LIKE '%%%1%%' OR "
+                             "Ration LIKE '%%%1%%' OR "
+                             "EntryTime LIKE '%%%1%%' OR "
+                             "Born LIKE '%%%1%%' OR "
+                             "Age LIKE '%%%1%%' OR "
+                             "EducationBackground LIKE '%%%1%%' OR "
+                             "MaritalStatus LIKE '%%%1%%' OR "
+                             "Height LIKE '%%%1%%' OR "
+                             "Weight LIKE '%%%1%%' OR "
+                             "JobId LIKE '%%%1%%' OR "
+                             "Department LIKE '%%%1%%' OR "
+                             "JobIdentity LIKE '%%%1%%' OR "
+                             "CertificateType LIKE '%%%1%%' OR "
+                             "CertificateNumber LIKE '%%%1%%' OR "
+                             "NativePlace LIKE '%%%1%%' OR "
+                             "Place LIKE '%%%1%%' OR "
+                             "Phone LIKE '%%%1%%' OR "
+                             "Email LIKE '%%%1%%' OR "
+                             "PractiseCertificate LIKE '%%%1%%'")
+                     .arg(ui->SearchDoctorEdit->text());
     IDatabase::getInstance().searchDoctor(filter);
 }
 
@@ -346,5 +367,54 @@ void mainview::on_FilterTreatRecordcomboBox_activated(int index)
 
     // 更新视图
     ui->TreatRecordMessageView->setModel(IDatabase::getInstance().TreatRecordTabModel);
+}
+
+
+void mainview::on_SearchPatientButton_clicked()
+{
+    QString filter = QString("Id LIKE '%%%1%%' OR "
+                             "PatientName LIKE '%%%1%%' OR "
+                             "Sex LIKE '%%%1%%' OR "
+                             "Ration LIKE '%%%1%%' OR "
+                             "Height LIKE '%%%1%%' OR "
+                             "Weight LIKE '%%%1%%' OR "
+                             "Born LIKE '%%%1%%' OR "
+                             "Age LIKE '%%%1%%' OR "
+                             "CertificateType LIKE '%%%1%%' OR "
+                             "CertificateNumber LIKE '%%%1%%' OR "
+                             "NativePlace LIKE '%%%1%%' OR "
+                             "Place LIKE '%%%1%%' OR "
+                             "Phone LIKE '%%%1%%' OR "
+                             "Email LIKE '%%%1%%'")
+                     .arg(ui->SearchPatientEdit->text());
+    IDatabase::getInstance().searchPatient(filter);
+}
+
+
+void mainview::on_SearchDrugButton_clicked()
+{
+    QString filter = QString("DrugId LIKE '%%%1%%' OR "
+                             "DrugName LIKE '%%%1%%' OR "
+                             "Dosage LIKE '%%%1%%' OR "
+                             "InventoryNumber LIKE '%%%1%%' OR "
+                             "DeliveryNumber LIKE '%%%1%%' OR "
+                             "ManufactureDate LIKE '%%%1%%' OR "
+                             "ExpirationDate LIKE '%%%1%%' OR "
+                             "EntryTime LIKE '%%%1%%' OR "
+                             "DeliveryTime LIKE '%%%1%%'")
+                     .arg(ui->SearchDrugEdit->text());
+    IDatabase::getInstance().searchDrug(filter);
+}
+
+
+void mainview::on_SearchTreatRecordButton_clicked()
+{
+    QString filter = QString("PatientName LIKE '%%%1%%' OR "
+                             "DoctorName LIKE '%%%1%%' OR "
+                             "TreatDate LIKE '%%%1%%' OR "
+                             "TreatResult LIKE '%%%1%%' OR "
+                             "PrescribeDrug LIKE '%%%1%%'")
+                     .arg(ui->SearchTreatRecordEdit->text());
+    IDatabase::getInstance().searchTreatRecord(filter);
 }
 
